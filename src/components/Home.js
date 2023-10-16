@@ -178,8 +178,6 @@ function Home() {
 
             <Button onClick={filterVegetables} sx={{ ':hover': { bgcolor: '#242734', color: 'white' }, bgcolor: '#155b8a', margin: '10px' }} variant="contained">Vegetables</Button>
 
-            <Button onClick={filterFoodGrains} sx={{ ':hover': { bgcolor: '#242734', color: 'white' }, bgcolor: '#155b8a', margin: '10px' }} variant="contained">Food Grains</Button>
-
             <Button onClick={clearAllFilters} sx={{ ':hover': { bgcolor: '#242734', color: 'white' }, bgcolor: '#155b8a', margin: '10px' }} variant="contained">Clear Filters</Button>
           </div>
 

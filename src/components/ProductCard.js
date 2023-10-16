@@ -26,20 +26,37 @@ function ProductCard({ id, ownerId, name, description, category, price, image, l
   const viewProductDetails = (id, category) => {
     navigate('/productdetails/' + id)
     const formdata = new FormData();
-    formdata.append('id', JSON.parse(localStorage.getItem('user'))._id)
-    formdata.append('category', category);
 
-    axios.post(constant.URL + '/api/user/productclick', formdata, {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then(res => {
-        console.log("Resp: ", res);
+
+    if (localStorage.getItem('user')) {
+      formdata.append('id', JSON.parse(localStorage.getItem('user'))._id)
+      formdata.append('category', category);
+
+      axios.post(constant.URL + '/api/user/productclick', formdata, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
       })
-      .catch(err => {
-        alert(err.response.data)
-      });
+        .then(res => {
+          console.log("Resp: ", res);
+        })
+        .catch(err => {
+          alert(err.response.data)
+        });
+
+    }
+
+    // axios.post(constant.URL + '/api/user/productclick', formdata, {
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    // })
+    //   .then(res => {
+    //     console.log("Resp: ", res);
+    //   })
+    //   .catch(err => {
+    //     alert(err.response.data)
+    //   });
   }
 
 

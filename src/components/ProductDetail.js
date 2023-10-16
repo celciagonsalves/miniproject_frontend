@@ -36,14 +36,14 @@ function ProductDetail() {
 			.then(res => {
 				console.log(res)
 				setSelectedProduct(res.data)
-				if(res.data.category==='Fruits'){
+				if (res.data.category === 'Fruits') {
 					setProductData(data.products.fruits)
-				}else if(res.data.category==='Vegetables'){
+				} else if (res.data.category === 'Vegetables') {
 					setProductData(data.products.vegetables)
-				}else{
+				} else {
 					setProductData(data.products.foodgrains)
 				}
-				
+
 			})
 			.catch(err =>
 				console.log("This is the error", err),
@@ -55,30 +55,59 @@ function ProductDetail() {
 		console.log(ownerId);
 		console.log(id)
 
-		const formdata = new FormData();
-		formdata.append('id', id);
-		formdata.append('ownerId', ownerId);
-		formdata.append('name', JSON.parse(localStorage.getItem('user')).firstname + ' ' + JSON.parse(localStorage.getItem('user')).lastname);
-		formdata.append('phone', '9820223032');
-		formdata.append('location', JSON.parse(localStorage.getItem('user')).location);
+		if (localStorage.getItem('user')) {
+			const formdata = new FormData();
+			formdata.append('id', id);
+			formdata.append('ownerId', ownerId);
+			formdata.append('name', JSON.parse(localStorage.getItem('user')).firstname + ' ' + JSON.parse(localStorage.getItem('user')).lastname);
+			formdata.append('phone', '9820223032');
+			formdata.append('location', JSON.parse(localStorage.getItem('user')).location);
 
-		axios.post(constant.URL+'/api/transaction/createtransaction', formdata, {
-			headers: {
-				'Content-Type': 'application/json',
-			},
-		})
-			.then(res => {
-				
-				console.log(res)
-				
-				if(res.status===200){
-					alert("Product Brought successfully!");
-				}
+			axios.post(constant.URL + '/api/transaction/createtransaction', formdata, {
+				headers: {
+					'Content-Type': 'application/json',
+				},
 			})
-			.catch(err => {
-				
-				console.log(err)
-			});
+				.then(res => {
+
+					console.log(res)
+
+					if (res.status === 200) {
+						alert("Product Brought successfully!");
+					}
+				})
+				.catch(err => {
+
+					console.log(err)
+				});
+		}else{
+			alert('Please login to buy products')
+		}
+
+		// const formdata = new FormData();
+		// formdata.append('id', id);
+		// formdata.append('ownerId', ownerId);
+		// formdata.append('name', JSON.parse(localStorage.getItem('user')).firstname + ' ' + JSON.parse(localStorage.getItem('user')).lastname);
+		// formdata.append('phone', '9820223032');
+		// formdata.append('location', JSON.parse(localStorage.getItem('user')).location);
+
+		// axios.post(constant.URL+'/api/transaction/createtransaction', formdata, {
+		// 	headers: {
+		// 		'Content-Type': 'application/json',
+		// 	},
+		// })
+		// 	.then(res => {
+
+		// 		console.log(res)
+
+		// 		if(res.status===200){
+		// 			alert("Product Brought successfully!");
+		// 		}
+		// 	})
+		// 	.catch(err => {
+
+		// 		console.log(err)
+		// 	});
 	}
 
 	const responsive = {
